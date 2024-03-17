@@ -1,45 +1,33 @@
-def add(x, y):
-    return x + y
-
-def subtract(x, y):
-    return x - y
-
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y == 0:
-        raise ValueError("Cannot divide by zero")
-    return x / y
-
-def calculator():
+def arithmetic_calculator():
     try:
         num1 = float(input("Enter the first number: "))
         num2 = float(input("Enter the second number: "))
+        operation = input("Choose operation (+, -, *, /): ")
 
-        print("Select an operation:")
-        print("1. Add")
-        print("2. Subtract")
-        print("3. Multiply")
-        print("4. Divide")
-
-        choice = int(input("Enter your choice (1/2/3/4): "))
-
-        if choice == 1:
-            result = add(num1, num2)
-        elif choice == 2:
-            result = subtract(num1, num2)
-        elif choice == 3:
-            result = multiply(num1, num2)
-        elif choice == 4:
-            result = divide(num1, num2)
+        if operation == '+':
+            print(f"{num1} + {num2} = {num1 + num2}")
+        elif operation == '-':
+            print(f"{num1} - {num2} = {num1 - num2}")
+        elif operation == '*':
+            print(f"{num1} * {num2} = {num1 * num2}")
+        elif operation == '/':
+            if num2 == 0:
+                print("Error: Division by zero!")
+            else:
+                print(f"{num1} / {num2} = {num1 / num2}")
         else:
-            raise ValueError("Invalid choice")
+            print("Invalid operation!")
 
-        print(f"The result is: {result}")
+        choice = input("Do you want to perform another operation? (yes/no): ")
+        if choice.lower() == 'yes':
+            arithmetic_calculator()  # Recursively call itself for another calculation
+        elif choice.lower() == 'no':
+            print("Thank you for using the calculator!")
+        else:
+            print("Invalid choice! Exiting...")
 
-    except ValueError as e:
-        print(f"Error: {e}")
+    except ValueError:
+        print("Invalid input! Please enter valid numbers.")
+        arithmetic_calculator()  # Recursively call itself on invalid input
 
-if _name_ == "_main_":
-    calculator()
+arithmetic_calculator()
